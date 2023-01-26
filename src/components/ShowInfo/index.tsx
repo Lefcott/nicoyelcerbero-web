@@ -16,7 +16,7 @@ export default function ShowInfo({ show }) {
       </div>
       <div className="flex items-center space-x-4">
         <FontAwesomeIcon icon={faLocationDot} />
-        <span className="text-lg">
+        <span className="text-lg pl-2">
           {show.locationName} (
           <Link href={show.addressUrl} target="_blank">
             <span className="text-teal-400">{show.address}</span>
@@ -27,13 +27,13 @@ export default function ShowInfo({ show }) {
       {show.isFree && (
         <div className="flex items-center space-x-4">
           <FontAwesomeIcon icon={faTicket} />
-          <span className="text-base">Entrada gratis</span>
+          <span className="text-base pl-[2px]">Entrada gratis</span>
         </div>
       )}
       {!show.isFree && show.presalePrice && (
         <div className="flex items-center space-x-4">
           <FontAwesomeIcon icon={faTicket} />
-          <span className="text-base">
+          <span className="text-base pl-[2px]">
             Entrada anticipada: $ {show.presalePrice}
           </span>
         </div>
@@ -41,7 +41,7 @@ export default function ShowInfo({ show }) {
       {!show.isFree && show.indoorPrice && (
         <div className="flex items-center space-x-4">
           <FontAwesomeIcon icon={faTicket} />
-          <span className="text-base">
+          <span className="text-base pl-[2px]">
             Entrada en puerta: $ {show.indoorPrice}
           </span>
         </div>
@@ -49,7 +49,7 @@ export default function ShowInfo({ show }) {
       {show.onlyAdults && (
         <div className="flex items-center space-x-4">
           <FontAwesomeIcon icon={faUser} />
-          <span className="text-base">Evento para mayores de 18 años</span>
+          <span className="text-base pl-[6px]">Evento para mayores de 18 años</span>
         </div>
       )}
     </>

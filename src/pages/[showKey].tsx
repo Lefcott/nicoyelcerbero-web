@@ -1,3 +1,5 @@
+import BuyTicketsButton from "@/components/BuyTIcketsButton";
+import BuyTicketsForm from "@/components/BuyTicketsForm";
 import Layout from "@/components/Layout/index";
 import ShowBanner from "@/components/ShowBanner";
 import ShowInfo from "@/components/ShowInfo/index";
@@ -7,9 +9,17 @@ export default function ShowDetails({ show }) {
   return (
     <>
       <Layout>
-        <ShowBanner show={show} />
-        <div className="mt-5">
-          <ShowInfo show={show} />
+        <div className="flex flex-col justify-start">
+          <ShowBanner show={show} />
+          <div className="mt-5">
+            <ShowInfo show={show} />
+          </div>
+          <div className="mt-5">
+            <BuyTicketsButton />
+          </div>
+          <div className="mt-96">
+            <BuyTicketsForm />
+          </div>
         </div>
       </Layout>
     </>

@@ -1,10 +1,5 @@
-import Link from "next/link";
-import Button from "../Button";
+import Button from "../LinkButton";
 
 export default function BuyTicketsButton() {
-  return (
-    <Link href="#comprar-entradas">
-      <Button>Comprar entradas</Button>
-    </Link>
-  );
+  return <Button href="#comprar-entradas">Comprar entradas</Button>;
 }

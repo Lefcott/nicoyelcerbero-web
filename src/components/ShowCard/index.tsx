@@ -8,7 +8,7 @@ export default function ShowCard({ show }) {
       className="w-[280px] h-[487px] rounded-md shadow-2xl shadow-gray-500/50 relative m-2 duration-500 hover:scale-105"
     >
       <Image
-        src={show.imageUrl}
+        src={show.flyerUrl}
         fill
         className="rounded-md"
         alt={`Nico y El Cerbero - ${show.date}`}

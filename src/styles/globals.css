@@ -6,4 +6,9 @@
 
 * {
   font-family: "Poppins", sans-serif;
+  color: whitesmoke;
+}
+
+body {
+  background-color: #222;
 }

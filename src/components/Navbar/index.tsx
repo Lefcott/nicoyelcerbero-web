@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <div className="w-full flex h-14 bg-slate-100">
-      <div className="flex items-center space-x-2 ml-2">
+    <div className="w-full flex h-16">
+      <Link href="/" className="flex items-center space-x-2 ml-4">
         <Image
           src="/logo.png"
           width={42}
@@ -11,7 +12,7 @@ export default function Navbar() {
           alt="Logo Nico y El Cerbero"
         />
         <span>Nico y El Cerbero</span>
-      </div>
+      </Link>
     </div>
   );
 }

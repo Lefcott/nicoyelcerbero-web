@@ -3,8 +3,12 @@ import ShowCards from "@/components/ShowCards";
 
 export default function Home() {
   return (
-    <Layout>
-      <ShowCards />
-    </Layout>
+    <>
+      <Layout>
+        <div className="mt-16">
+          <ShowCards />
+        </div>
+      </Layout>
+    </>
   );
 }

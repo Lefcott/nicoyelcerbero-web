@@ -40,7 +40,7 @@ export default function BuyTicketsForm() {
         {guestAuxArray.map((_, i) => (
           <div className="m-6 space-x-5" key={i}>
             <GuestInfo
-              number={i + 1}
+              number={ticketCount > 1 ? i + 1 : ""}
               onChange={(key, value) => setGuestInfo(i, key, value)}
             />
           </div>

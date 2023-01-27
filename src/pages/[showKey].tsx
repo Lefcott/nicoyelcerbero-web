@@ -4,6 +4,7 @@ import Layout from "@/components/Layout/index";
 import ShowBanner from "@/components/ShowBanner";
 import ShowInfo from "@/components/ShowInfo/index";
 import Head from "next/head";
+import Script from "next/script";
 import shows from "../data/shows";
 
 export default function ShowDetails({ show }) {
@@ -12,6 +13,7 @@ export default function ShowDetails({ show }) {
       <Head>
         <title>Nico y El Cerbero - comprar entradas</title>
       </Head>
+      <Script src="https://sdk.mercadopago.com/js/v2" />
       <Layout>
         <div className="flex flex-col justify-start">
           <ShowBanner show={show} />

@@ -1,7 +1,11 @@
+import Image from "next/image";
 import { useEffect, useState } from "react";
+import Button from "../LinkButton";
 import TextInput from "../TextInput";
 import GuestInfo from "./GuestInfo";
 import TicketSelector from "./TicketsSelector";
+import mercadoPagoImage from "../../../public/mercado_pago_icon.png";
+import { openCheckout } from "@/utils/mercadoPago";
 
 export default function BuyTicketsForm() {
   const [ticketCount, setTicketCount] = useState(1);
@@ -46,6 +50,18 @@ export default function BuyTicketsForm() {
           </div>
         ))}
       </div>
+      <div className="mt-20">
+        <Button onClick={openCheckout}>
+          <Image
+            width={20}
+            height={20}
+            src={mercadoPagoImage}
+            alt="mercado pago icon"
+          />
+          <span>Comprar con Mercado Pago</span>
+        </Button>
+      </div>
+      <div className="cho-container hidden"></div>
     </div>
   );
 }

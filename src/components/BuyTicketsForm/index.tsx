@@ -6,8 +6,9 @@ import GuestInfo from "./GuestInfo";
 import TicketSelector from "./TicketsSelector";
 import mercadoPagoImage from "../../../public/mercado_pago_icon.png";
 import { openCheckout } from "@/utils/mercadoPago";
+import { createTicketPayment } from "@/services/api/ticketPayments";
 
-export default function BuyTicketsForm() {
+export default function BuyTicketsForm({ showKey }) {
   const [ticketCount, setTicketCount] = useState(1);
   const [email, setEmail] = useState("");
   const [guests, setGuests] = useState<any[]>(Array(10).fill(null));
@@ -24,6 +25,17 @@ export default function BuyTicketsForm() {
       { ...(guests[guestIndex] ? guests[guestIndex] : {}), [key]: value },
       ...guests.slice(guestIndex + 1),
     ]);
+  };
+
+  const createPreference = async () => {
+    const filteredGuests = guestAuxArray.map((_, i) => guests[i]);
+    const ticketPayment = await createTicketPayment(
+      showKey,
+      email,
+      filteredGuests
+    );
+
+    openCheckout(ticketPayment.data.preferenceId);
   };
 
   return (
@@ -51,7 +63,7 @@ export default function BuyTicketsForm() {
         ))}
       </div>
       <div className="mt-20">
-        <Button onClick={openCheckout}>
+        <Button onClick={createPreference}>
           <Image
             width={20}
             height={20}

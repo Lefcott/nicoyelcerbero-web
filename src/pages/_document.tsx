@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         {/* <meta
           http-equiv="Content-Security-Policy"
-          content="frame-src 'self' *.mercadopago.com.ar;"
+          content="frame-src 'self' *.mercadopago.com.ar *.mercadopago.com *.mercadopago.com.ar;"
         /> */}
       </Head>
       <body>

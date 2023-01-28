@@ -7,6 +7,7 @@ import banner from "../../public/banner.jpg";
 const SHOWS = [
   {
     key: "viernes-18-de-noviembre-de-2022-a-las-20-30-hs",
+    active: true,
     flyerUrl: fecha1,
     bannerUrl: banner,
     date: "Viernes 18 de noviembre de 2022 a las 20:30 hs",
@@ -20,6 +21,7 @@ const SHOWS = [
   },
   {
     key: "viernes-2-de-diciembre-de-2022-a-las-20-30-hs",
+    active: true,
     flyerUrl: fecha2,
     bannerUrl: banner,
     date: "Viernes 2 de diciembre de 2022 a las 20:00 hs",
@@ -33,6 +35,7 @@ const SHOWS = [
   },
   {
     key: "sabado-3-de-diciembre-de-2022-a-las-20-30-hs",
+    active: true,
     flyerUrl: fecha3,
     bannerUrl: banner,
     date: "Sábado 3 de diciembre de 2022 a las 20:00 hs",
@@ -46,6 +49,7 @@ const SHOWS = [
   },
   {
     key: "viernes-20-de-enero-de-2022-a-las-20-30-hs",
+    active: true,
     flyerUrl: fecha4,
     bannerUrl: banner,
     date: "Viernes 20 de enero de 2022 a las 20:30 hs",

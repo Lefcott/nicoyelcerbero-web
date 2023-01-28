@@ -24,7 +24,7 @@ export default function ShowDetails({ show }) {
             <BuyTicketsButton />
           </div>
           <div className="mt-96">
-            <BuyTicketsForm />
+            <BuyTicketsForm showKey={show.key} />
           </div>
         </div>
       </Layout>

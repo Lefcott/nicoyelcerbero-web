@@ -12,11 +12,11 @@ export function getMercadoPago() {
   );
 }
 
-export function openCheckout() {
+export function openCheckout(preferenceId) {
   const mp = getMercadoPago();
   const checkout = mp.checkout({
     preference: {
-      id: "YOUR_PREFERENCE_ID",
+      id: preferenceId,
     },
     autoOpen: true,
   });

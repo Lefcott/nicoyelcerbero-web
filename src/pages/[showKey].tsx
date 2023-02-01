@@ -6,7 +6,6 @@ import ShowInfo from "@/components/ShowInfo/index";
 import { getShow } from "@/services/api/shows";
 import Head from "next/head";
 import Script from "next/script";
-import shows from "../data/shows";
 
 export default function ShowDetails({ show }) {
   return (
@@ -18,13 +17,13 @@ export default function ShowDetails({ show }) {
       <Layout>
         <div className="flex flex-col justify-start">
           <ShowBanner show={show} />
-          <div className="mt-5">
+          <div className="mt-5 px-8 md:px-0">
             <ShowInfo show={show} />
           </div>
-          <div className="mt-5">
+          <div className="mt-5 px-8 md:px-0">
             <BuyTicketsButton />
           </div>
-          <div className="mt-96">
+          <div className="mt-96 px-8 md:px-0">
             <BuyTicketsForm showKey={show.key} />
           </div>
         </div>

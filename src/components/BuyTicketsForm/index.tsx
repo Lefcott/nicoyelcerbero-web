@@ -7,11 +7,13 @@ import TicketSelector from "./TicketsSelector";
 import mercadoPagoImage from "../../../public/mercado_pago_icon.png";
 import { openCheckout } from "@/utils/mercadoPago";
 import { createTicketPayment } from "@/services/api/ticketPayments";
+import Spinner from "../Spinner";
 
 export default function BuyTicketsForm({ showKey }) {
   const [ticketCount, setTicketCount] = useState(1);
   const [email, setEmail] = useState("");
   const [guests, setGuests] = useState<any[]>(Array(10).fill(null));
+  const [creatingTicketPayment, setCreatingTicketPayment] = useState(false);
 
   const guestAuxArray: number[] = [];
 
@@ -29,13 +31,19 @@ export default function BuyTicketsForm({ showKey }) {
 
   const createPreference = async () => {
     const filteredGuests = guestAuxArray.map((_, i) => guests[i]);
-    const ticketPayment = await createTicketPayment(
-      showKey,
-      email,
-      filteredGuests
-    );
+    setCreatingTicketPayment(true);
+    try {
+      const ticketPayment = await createTicketPayment(
+        showKey,
+        email,
+        filteredGuests
+      );
 
-    openCheckout(ticketPayment.data.preferenceId);
+      await openCheckout(ticketPayment.data.preferenceId);
+    } catch (error) {
+      console.error(error);
+    }
+    setCreatingTicketPayment(false);
   };
 
   return (
@@ -50,7 +58,7 @@ export default function BuyTicketsForm({ showKey }) {
       </div>
       <div className="m-6 space-x-5">
         <span className="mr-6">Email</span>
-        <TextInput onChange={(e) => setEmail(e.target.value)} />
+        <TextInput onChange={(e) => setEmail(e.target.value)} value={email} />
       </div>
       <div className="mt-20">
         {guestAuxArray.map((_, i) => (
@@ -58,12 +66,14 @@ export default function BuyTicketsForm({ showKey }) {
             <GuestInfo
               number={ticketCount > 1 ? i + 1 : ""}
               onChange={(key, value) => setGuestInfo(i, key, value)}
+              firstName={guests[i]?.firstName || ""}
+              lastName={guests[i]?.lastName || ""}
             />
           </div>
         ))}
       </div>
-      <div className="mt-20">
-        <Button onClick={createPreference}>
+      <div className="flex space-x-5 mt-20">
+        <Button onClick={createPreference} disabled={creatingTicketPayment}>
           <Image
             width={20}
             height={20}
@@ -72,6 +82,7 @@ export default function BuyTicketsForm({ showKey }) {
           />
           <span>Comprar con Mercado Pago</span>
         </Button>
+        {creatingTicketPayment && <Spinner />}
       </div>
       <div className="cho-container hidden"></div>
     </div>

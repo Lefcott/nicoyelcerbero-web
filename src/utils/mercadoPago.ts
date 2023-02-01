@@ -12,15 +12,17 @@ export function getMercadoPago() {
   );
 }
 
-export function openCheckout(preferenceId) {
+export async function openCheckout(preferenceId) {
   const mp = getMercadoPago();
+
   const checkout = mp.checkout({
     preference: {
       id: preferenceId,
     },
     autoOpen: true,
   });
-  checkout.render({
+
+  await checkout.render({
     container: ".cho-container",
     label: "Pay",
   });

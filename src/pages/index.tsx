@@ -1,8 +1,9 @@
 import Layout from "@/components/Layout/index";
 import ShowCards from "@/components/ShowCards";
+import { getShows } from "@/services/api/shows";
 import Head from "next/head";
 
-export default function Home() {
+export default function Home({ shows }) {
   return (
     <>
       <Head>
@@ -10,9 +11,19 @@ export default function Home() {
       </Head>
       <Layout>
         <div className="mt-16">
-          <ShowCards />
+          <ShowCards shows={shows} />
         </div>
       </Layout>
     </>
   );
+}
+
+export async function getServerSideProps(props) {
+  const { data: shows } = await getShows();
+
+  return {
+    props: {
+      shows,
+    },
+  };
 }

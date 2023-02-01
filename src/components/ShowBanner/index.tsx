@@ -7,6 +7,7 @@ export default function ShowBanner({ show }) {
         src={show.bannerUrl}
         className="rounded-md"
         width={1000}
+        height={1000}
         alt={`Banner ${show.date}`}
       />
     </>

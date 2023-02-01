@@ -1,7 +1,6 @@
-import shows from "../../data/shows";
 import ShowCard from "../ShowCard";
 
-export default function ShowCards() {
+export default function ShowCards({ shows }) {
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl mb-8">Estas son nuestras próximas fechas:</h1>

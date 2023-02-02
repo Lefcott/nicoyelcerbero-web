@@ -3,7 +3,7 @@ import BuyTicketsForm from "@/components/BuyTicketsForm";
 import Layout from "@/components/Layout/index";
 import ShowBanner from "@/components/ShowBanner";
 import ShowInfo from "@/components/ShowInfo/index";
-import { getShow } from "@/services/api/shows";
+import { getShow, getShows } from "@/services/api/shows";
 import Head from "next/head";
 import Script from "next/script";
 
@@ -36,8 +36,17 @@ export default function ShowDetails({ show }) {
   );
 }
 
-export async function getServerSideProps(props) {
-  const { showKey } = props.query;
+export async function getStaticPaths() {
+  const { data: shows } = await getShows();
+
+  return {
+    paths: shows.map((show) => ({ params: { showKey: show.key } })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps(props) {
+  const { showKey } = props.params;
   const { data: show } = await getShow(showKey);
 
   return {

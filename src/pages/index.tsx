@@ -18,7 +18,7 @@ export default function Home({ shows }) {
   );
 }
 
-export async function getServerSideProps(props) {
+export async function getStaticProps(props) {
   const { data: shows } = await getShows();
 
   return {

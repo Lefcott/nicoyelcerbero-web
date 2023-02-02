@@ -55,7 +55,7 @@ export async function getStaticProps(props) {
 
   return {
     props: {
-      show: showResponse?.data?.show || null,
+      show: showResponse?.data || null,
     },
   };
 }

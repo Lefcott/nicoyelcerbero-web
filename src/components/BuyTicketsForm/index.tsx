@@ -8,6 +8,7 @@ import mercadoPagoImage from "../../../public/mercado_pago_icon.png";
 import { openCheckout } from "@/utils/mercadoPago";
 import { createTicketPayment } from "@/services/api/ticketPayments";
 import Spinner from "../Spinner";
+import { validateTicketsForm } from "./utils";
 
 export default function BuyTicketsForm({ showKey }) {
   const [ticketCount, setTicketCount] = useState(1);
@@ -30,8 +31,14 @@ export default function BuyTicketsForm({ showKey }) {
   };
 
   const createPreference = async () => {
-    const filteredGuests = guestAuxArray.map((_, i) => guests[i]);
+    const filteredGuests = guestAuxArray.map((_, i) => guests[i] || {});
+
+    if (!validateTicketsForm(email, filteredGuests)) {
+      return;
+    }
+
     setCreatingTicketPayment(true);
+
     try {
       const ticketPayment = await createTicketPayment(
         showKey,

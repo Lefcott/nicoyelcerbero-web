@@ -46,12 +46,16 @@ export default function ShowInfo({ show }) {
           </span>
         </div>
       )}
-      {show.onlyAdults && (
+      {
         <div className="flex items-center space-x-4">
           <FontAwesomeIcon icon={faUser} />
-          <span className="text-base pl-[6px]">Evento para mayores de 18 años</span>
+          <span className="text-base pl-[6px]">
+            {show.onlyAdults
+              ? "Evento para mayores de 18 años"
+              : "Evento apto para todo público"}
+          </span>
         </div>
-      )}
+      }
     </>
   );
 }

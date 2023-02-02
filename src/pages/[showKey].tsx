@@ -41,7 +41,7 @@ export async function getStaticPaths() {
 
   return {
     paths: shows.map((show) => ({ params: { showKey: show.key } })),
-    fallback: false,
+    fallback: true,
   };
 }
 

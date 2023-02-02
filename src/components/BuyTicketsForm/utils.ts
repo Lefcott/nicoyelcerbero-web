@@ -7,7 +7,6 @@ export interface Guest {
 }
 
 export const validateTicketsForm = (email: string, guests: Guest[]) => {
-  console.log("guests", guests);
   const validEmail = isEmail(email);
 
   if (!validEmail) {

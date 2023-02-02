@@ -26,7 +26,7 @@ export default function ShowDetails({ show }) {
                 <BuyTicketsButton />
               </div>
               <div className="mt-96 px-8 md:px-0">
-                <BuyTicketsForm showKey={show.key} />
+                <BuyTicketsForm show={show} />
               </div>
             </>
           )}
@@ -48,6 +48,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(props) {
   const { showKey } = props.params;
   const { data: show } = await getShow(showKey);
+  console.log("show", show);
 
   return {
     props: {

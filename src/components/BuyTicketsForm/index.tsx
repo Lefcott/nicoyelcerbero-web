@@ -9,8 +9,9 @@ import { openCheckout } from "@/utils/mercadoPago";
 import { createTicketPayment } from "@/services/api/ticketPayments";
 import Spinner from "../Spinner";
 import { validateTicketsForm } from "./utils";
+import { getFee } from "@/utils/getFee";
 
-export default function BuyTicketsForm({ showKey }) {
+export default function BuyTicketsForm({ show }) {
   const [ticketCount, setTicketCount] = useState(1);
   const [email, setEmail] = useState("");
   const [guests, setGuests] = useState<any[]>(Array(10).fill(null));
@@ -41,7 +42,7 @@ export default function BuyTicketsForm({ showKey }) {
 
     try {
       const ticketPayment = await createTicketPayment(
-        showKey,
+        show.key,
         email,
         filteredGuests
       );
@@ -52,6 +53,10 @@ export default function BuyTicketsForm({ showKey }) {
     }
     setCreatingTicketPayment(false);
   };
+
+  const ticketsPrice = guestAuxArray.length * show.presalePrice;
+  const fee = getFee(show, ticketsPrice);
+  const totalPrice = ticketsPrice + fee;
 
   return (
     <div id="comprar-entradas" className="mb-96">
@@ -79,7 +84,28 @@ export default function BuyTicketsForm({ showKey }) {
           </div>
         ))}
       </div>
-      <div className="flex space-x-5 mt-20">
+      <div className="mt-28 w-[253px]">
+        {show.feePayer !== "seller" && (
+          <>
+            <div className="mb-2 space-x-5 flex justify-between">
+              <span className="mr-6">
+                {guestAuxArray.length} Entrada
+                {guestAuxArray.length > 1 ? "s" : ""}:
+              </span>
+              <span className="mr-6">$ {ticketsPrice}</span>
+            </div>
+            <div className="mt-2 space-x-5 flex justify-between">
+              <span className="mr-6">Tarifa de servicio:</span>
+              <span className="mr-6">$ {fee.toFixed(2)}</span>
+            </div>
+          </>
+        )}
+        <div className="mt-2 space-x-5 flex justify-between">
+          <span className="mr-6">Total a pagar:</span>
+          <span className="mr-6">$ {totalPrice.toFixed(2)}</span>
+        </div>
+      </div>
+      <div className="flex space-x-5 mt-4">
         <Button onClick={createPreference} disabled={creatingTicketPayment}>
           <Image
             width={20}

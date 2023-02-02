@@ -20,12 +20,16 @@ export default function ShowDetails({ show }) {
           <div className="mt-5 px-8 md:px-0">
             <ShowInfo show={show} />
           </div>
-          <div className="mt-5 px-8 md:px-0">
-            <BuyTicketsButton />
-          </div>
-          <div className="mt-96 px-8 md:px-0">
-            <BuyTicketsForm showKey={show.key} />
-          </div>
+          {!show.isFree && (
+            <>
+              <div className="mt-5 px-8 md:px-0">
+                <BuyTicketsButton />
+              </div>
+              <div className="mt-96 px-8 md:px-0">
+                <BuyTicketsForm showKey={show.key} />
+              </div>
+            </>
+          )}
         </div>
       </Layout>
     </>

@@ -8,6 +8,10 @@ import Head from "next/head";
 import Script from "next/script";
 
 export default function ShowDetails({ show }) {
+  if (!show) {
+    return <div>No</div>;
+  }
+
   return (
     <>
       <Head>

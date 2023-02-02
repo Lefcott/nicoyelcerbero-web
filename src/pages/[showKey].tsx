@@ -48,7 +48,6 @@ export async function getStaticPaths() {
 export async function getStaticProps(props) {
   const { showKey } = props.params;
   const { data: show } = await getShow(showKey);
-  console.log("show", show);
 
   return {
     props: {

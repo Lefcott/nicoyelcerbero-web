@@ -9,7 +9,7 @@ import Script from "next/script";
 
 export default function ShowDetails({ show }) {
   if (!show) {
-    return <div>No</div>;
+    return <div>Página no encontrada</div>;
   }
 
   return (
@@ -51,11 +51,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(props) {
   const { showKey } = props.params;
-  const { data: show } = await getShow(showKey);
+  const showResponse = await getShow(showKey).catch(console.error);
 
   return {
     props: {
-      show,
+      show: showResponse?.data?.show || null,
     },
   };
 }

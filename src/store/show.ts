@@ -1,6 +1,6 @@
 import { ShowInterface } from "@/interfaces/show";
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { devtools } from "zustand/middleware";
 
 export type ShowStore = ShowInterface & {
   update: (properties: Partial<ShowInterface>) => void;
@@ -8,8 +8,8 @@ export type ShowStore = ShowInterface & {
 
 export const useShowStore = create<ShowStore>()(
   devtools(
-    // persist(
     (set) => ({
+      _id: "",
       date: "",
       active: true,
       address: "",
@@ -26,9 +26,6 @@ export const useShowStore = create<ShowStore>()(
       presalePrice: 0,
       update: (properties) => set({ ...properties }),
     }),
-    {
-      name: "show-storage",
-    }
-    // )
+    { name: "show-storage" }
   )
 );

@@ -6,10 +6,11 @@ import ShowInfo from "@/components/ShowInfo/index";
 import { getShow, getShows } from "@/services/api/shows";
 import Head from "next/head";
 import Script from "next/script";
+import NotFoundPage from "./404";
 
 export default function ShowDetails({ show }) {
   if (!show) {
-    return <div>Página no encontrada</div>;
+    return <NotFoundPage />;
   }
 
   return (
@@ -52,10 +53,11 @@ export async function getStaticPaths() {
 export async function getStaticProps(props) {
   const { showKey } = props.params;
   const showResponse = await getShow(showKey).catch(console.error);
+  const show = showResponse?.data || null;
 
   return {
     props: {
-      show: showResponse?.data || null,
+      show,
     },
   };
 }

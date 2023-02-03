@@ -1,4 +1,4 @@
-import Button from "../LinkButton";
+import Button from "../Button";
 
 export default function BuyTicketsButton() {
   return (

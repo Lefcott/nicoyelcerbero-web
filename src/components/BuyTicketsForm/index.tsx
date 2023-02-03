@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Button from "../LinkButton";
+import Button from "../Button";
 import TextInput from "../TextInput";
 import GuestInfo from "./GuestInfo";
 import TicketSelector from "./TicketsSelector";

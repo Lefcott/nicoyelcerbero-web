@@ -4,11 +4,35 @@ import Layout from "@/components/Layout/index";
 import ShowBanner from "@/components/ShowBanner";
 import ShowInfo from "@/components/ShowInfo/index";
 import { getShow, getShows } from "@/services/api/shows";
+import "@/sockets/showDetailsPage";
+import { useShowStore } from "@/store/show";
 import Head from "next/head";
 import Script from "next/script";
+import { useEffect, useRef } from "react";
 import NotFoundPage from "./404";
 
 export default function ShowDetails({ show }) {
+  const showFromStore = useShowStore((state) => state);
+  const firstRenderRef = useRef(true);
+
+  if (firstRenderRef.current) {
+    showFromStore.update(show);
+  }
+
+  useEffect(() => {
+    firstRenderRef.current = false;
+  }, []);
+
+  // useEffect(() => {
+  //   const handler = (data) => {
+  //     console.log("received event!!", data);
+  //   };
+  //   showDetailsPageSocket.on("showUpdated", handler);
+  //   return () => {
+  //     showDetailsPageSocket.off("showUpdated", handler);
+  //   };
+  // }, []);
+
   if (!show) {
     return <NotFoundPage />;
   }
@@ -21,9 +45,9 @@ export default function ShowDetails({ show }) {
       <Script src="https://sdk.mercadopago.com/js/v2" />
       <Layout>
         <div className="flex flex-col justify-start">
-          <ShowBanner show={show} />
+          <ShowBanner />
           <div className="mt-5 px-8 md:px-0">
-            <ShowInfo show={show} />
+            <ShowInfo />
           </div>
           {!show.isFree && (
             <>
@@ -31,7 +55,7 @@ export default function ShowDetails({ show }) {
                 <BuyTicketsButton />
               </div>
               <div className="mt-96 px-8 md:px-0">
-                <BuyTicketsForm show={show} />
+                <BuyTicketsForm />
               </div>
             </>
           )}

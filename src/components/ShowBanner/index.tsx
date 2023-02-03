@@ -1,6 +1,9 @@
+import { useShowStore } from "@/store/show";
 import Image from "next/image";
 
-export default function ShowBanner({ show }) {
+export default function ShowBanner() {
+  const show = useShowStore((state) => state);
+
   return (
     <>
       <Image

@@ -10,8 +10,10 @@ import { createTicketPayment } from "@/services/api/ticketPayments";
 import Spinner from "../Spinner";
 import { validateTicketsForm } from "./utils";
 import { getFee } from "@/utils/getFee";
+import { useShowStore } from "@/store/show";
 
-export default function BuyTicketsForm({ show }) {
+export default function BuyTicketsForm() {
+  const show = useShowStore((state) => state);
   const [ticketCount, setTicketCount] = useState(1);
   const [email, setEmail] = useState("");
   const [guests, setGuests] = useState<any[]>(Array(10).fill(null));
@@ -54,7 +56,7 @@ export default function BuyTicketsForm({ show }) {
     setCreatingTicketPayment(false);
   };
 
-  const ticketsPrice = guestAuxArray.length * show.presalePrice;
+  const ticketsPrice = guestAuxArray.length * (show.presalePrice || 0);
   const fee = getFee(show, ticketsPrice);
   const totalPrice = ticketsPrice + fee;
 

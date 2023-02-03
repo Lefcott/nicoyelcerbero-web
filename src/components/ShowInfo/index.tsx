@@ -6,8 +6,11 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { useShowStore } from "@/store/show";
 
-export default function ShowInfo({ show }) {
+export default function ShowInfo() {
+  const show = useShowStore((state) => state);
+
   return (
     <>
       <div className="flex items-center space-x-4 mb-4">

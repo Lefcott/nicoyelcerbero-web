@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import sweetAlert from "sweetalert2";
 import Button from "../Button";
 import TextInput from "../TextInput";
 import GuestInfo from "./GuestInfo";
@@ -11,6 +12,8 @@ import Spinner from "../Spinner";
 import { validateTicketsForm } from "./utils";
 import { getFee } from "@/utils/getFee";
 import { useShowStore } from "@/store/show";
+import EmailVerificationModal from "../EmailVerificationModal";
+import { createVerificationCode } from "@/services/api/verificationCodes";
 
 export default function BuyTicketsForm() {
   const show = useShowStore((state) => state);
@@ -18,6 +21,8 @@ export default function BuyTicketsForm() {
   const [email, setEmail] = useState("");
   const [guests, setGuests] = useState<any[]>(Array(10).fill(null));
   const [creatingTicketPayment, setCreatingTicketPayment] = useState(false);
+  const [sendingEmail, setSendingEmail] = useState(false);
+  const [codeModalOpen, setCodeModalOpen] = useState(false);
 
   const guestAuxArray: number[] = [];
 
@@ -36,10 +41,6 @@ export default function BuyTicketsForm() {
   const createPreference = async () => {
     const filteredGuests = guestAuxArray.map((_, i) => guests[i] || {});
 
-    if (!validateTicketsForm(email, filteredGuests)) {
-      return;
-    }
-
     setCreatingTicketPayment(true);
 
     try {
@@ -51,9 +52,45 @@ export default function BuyTicketsForm() {
 
       await openCheckout(ticketPayment.data.preferenceId);
     } catch (error) {
+      sweetAlert.fire({
+        title: "Error",
+        text: "Hubo un error al crear el pago con mercad pago.",
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+      });
       console.error(error);
     }
     setCreatingTicketPayment(false);
+  };
+
+  const sendVerificationCode = async () => {
+    const filteredGuests = guestAuxArray.map((_, i) => guests[i] || {});
+
+    if (!validateTicketsForm(email, filteredGuests)) {
+      return;
+    }
+
+    setSendingEmail(true);
+
+    try {
+      await createVerificationCode(email);
+    } catch (error) {
+      sweetAlert.fire({
+        title: "Error",
+        text: "Hubo un error al enviar el código de verificación.",
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+      });
+      console.error(error);
+    }
+
+    setSendingEmail(false);
+    setCodeModalOpen(true);
+  };
+
+  const handlePassCodeValidation = () => {
+    setCodeModalOpen(false);
+    createPreference();
   };
 
   const ticketsPrice = guestAuxArray.length * (show.presalePrice || 0);
@@ -107,8 +144,12 @@ export default function BuyTicketsForm() {
           <span className="mr-6">$ {totalPrice.toFixed(2)}</span>
         </div>
       </div>
-      <div className="flex space-x-5 mt-4">
-        <Button onClick={createPreference} disabled={creatingTicketPayment}>
+      <div className="mt-4">
+        <Button
+          onClick={sendVerificationCode}
+          disabled={sendingEmail || creatingTicketPayment}
+          loading={sendingEmail || creatingTicketPayment}
+        >
           <Image
             width={20}
             height={20}
@@ -117,8 +158,13 @@ export default function BuyTicketsForm() {
           />
           <span>Comprar con Mercado Pago</span>
         </Button>
-        {creatingTicketPayment && <Spinner />}
       </div>
+      <EmailVerificationModal
+        open={codeModalOpen}
+        email={email}
+        onClose={() => setCodeModalOpen(false)}
+        onPass={handlePassCodeValidation}
+      />
       <div className="cho-container hidden"></div>
     </div>
   );

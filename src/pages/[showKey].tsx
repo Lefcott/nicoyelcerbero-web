@@ -23,16 +23,6 @@ export default function ShowDetails({ show }) {
     firstRenderRef.current = false;
   }, []);
 
-  // useEffect(() => {
-  //   const handler = (data) => {
-  //     console.log("received event!!", data);
-  //   };
-  //   showDetailsPageSocket.on("showUpdated", handler);
-  //   return () => {
-  //     showDetailsPageSocket.off("showUpdated", handler);
-  //   };
-  // }, []);
-
   if (!show) {
     return <NotFoundPage />;
   }

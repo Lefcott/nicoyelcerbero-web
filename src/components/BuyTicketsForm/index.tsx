@@ -23,6 +23,7 @@ export default function BuyTicketsForm() {
   const [creatingTicketPayment, setCreatingTicketPayment] = useState(false);
   const [sendingEmail, setSendingEmail] = useState(false);
   const [codeModalOpen, setCodeModalOpen] = useState(false);
+  const [validatedEmails, setValidatedEmails] = useState<string[]>([]);
 
   const guestAuxArray: number[] = [];
 
@@ -88,7 +89,16 @@ export default function BuyTicketsForm() {
     setCodeModalOpen(true);
   };
 
+  const handleBuy = () => {
+    if (validatedEmails.includes(email)) {
+      createPreference();
+    } else {
+      sendVerificationCode();
+    }
+  };
+
   const handlePassCodeValidation = () => {
+    setValidatedEmails([...validatedEmails, email]);
     setCodeModalOpen(false);
     createPreference();
   };
@@ -146,7 +156,7 @@ export default function BuyTicketsForm() {
       </div>
       <div className="mt-4">
         <Button
-          onClick={sendVerificationCode}
+          onClick={handleBuy}
           disabled={sendingEmail || creatingTicketPayment}
           loading={sendingEmail || creatingTicketPayment}
         >

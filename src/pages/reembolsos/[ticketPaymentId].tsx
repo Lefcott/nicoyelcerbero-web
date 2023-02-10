@@ -1,8 +1,4 @@
-import BuyTicketsButton from "@/components/BuyTIcketsButton";
-import BuyTicketsForm from "@/components/BuyTicketsForm";
 import Layout from "@/components/Layout/index";
-import ShowBanner from "@/components/ShowBanner";
-import ShowInfo from "@/components/ShowInfo/index";
 import {
   getTicketPayment,
   getTicketPaymentIds,

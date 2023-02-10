@@ -29,8 +29,8 @@ const EmailVerificationModal = ({ email, open, onClose, onPass }) => {
     ]);
   };
 
-  const submitCode = async () => {
-    const completeCode = codes.join("");
+  const submitCode = async (code?: string) => {
+    const completeCode = code || codes.join("");
 
     setSubmitting(true);
 
@@ -57,6 +57,25 @@ const EmailVerificationModal = ({ email, open, onClose, onPass }) => {
       console.error(error);
     }
     setSubmitting(false);
+  };
+
+  const handlePaste = (e, index) => {
+    if (index > 0) {
+      return;
+    }
+    const pastedText = e.clipboardData.getData("Text")?.trim() || "";
+    const splittedCode = pastedText.split("");
+
+    if (
+      pastedText.length === 6 &&
+      splittedCode.every(
+        (digit) => digit.charCodeAt(0) >= 48 || digit.charCodeAt(0) <= 57
+      )
+    ) {
+      e.target.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.nextElementSibling?.focus();
+      setCodes(splittedCode);
+      submitCode(pastedText);
+    }
   };
 
   useEffect(() => {
@@ -87,6 +106,7 @@ const EmailVerificationModal = ({ email, open, onClose, onPass }) => {
                   value={code}
                   onChange={(e) => handleChangeDigit(e, index)}
                   autoFocus={index === 0}
+                  onPaste={(e) => handlePaste(e, index)}
                 />
               ))}
             </div>
@@ -98,7 +118,7 @@ const EmailVerificationModal = ({ email, open, onClose, onPass }) => {
                 Cancelar
               </button>
               <Button
-                onClick={submitCode}
+                onClick={() => submitCode()}
                 disabled={codes.join("").length < 6}
                 loading={submitting}
               >

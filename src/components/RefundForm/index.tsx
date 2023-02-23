@@ -1,15 +1,46 @@
 import { useTicketPaymentStore } from "@/store/ticketPayment";
 import { useState } from "react";
+import sweetAlert from "sweetalert2";
+import Button from "../Button";
+import { getSelectedGuests } from "./utils";
 
 export default function RefundForm() {
   const ticketPayment = useTicketPaymentStore((state) => state);
-  const [selectedGuests, setSelectedGuests] = useState({});
+  const [selectedGuestIndexes, setSelectedGuestIndexes] = useState({});
+  const selectedGuests = getSelectedGuests(
+    ticketPayment.guests,
+    selectedGuestIndexes
+  );
+  const selectedGuestIds = selectedGuests.map((guest) => guest._id);
+  const selectedGuestNames = selectedGuests.map(
+    (guest) => `${guest.firstName} ${guest.lastName}`
+  );
+  const conditionalS = selectedGuestIds.length > 1 ? "s" : "";
 
   const switchGuestSelected = (index) => {
-    setSelectedGuests({
-      ...selectedGuests,
-      [index]: !selectedGuests[index],
+    setSelectedGuestIndexes({
+      ...selectedGuestIndexes,
+      [index]: !selectedGuestIndexes[index],
     });
+  };
+
+  const handleRefund = () => {
+    sweetAlert
+      .fire({
+        title: `Devolver entrada${conditionalS}`,
+        text: `Querés devolver la${conditionalS} entrada${conditionalS} de ${selectedGuestNames.join(
+          ", "
+        )}?`,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Sí",
+        cancelButtonText: "No",
+      })
+      .then(({ isConfirmed }) => {
+        if (isConfirmed) {
+          console.log("Devolver");
+        }
+      });
   };
 
   return (
@@ -24,7 +55,7 @@ export default function RefundForm() {
       )}
       <div className="space-y-5 w-full mt-4">
         {ticketPayment.guests.map((guest, i) => {
-          const selected = !!selectedGuests[i];
+          const selected = !!selectedGuestIndexes[i];
           return (
             <div
               key={i}
@@ -46,6 +77,11 @@ export default function RefundForm() {
             </div>
           );
         })}
+      </div>
+      <div className="mt-10">
+        <Button disabled={selectedGuestIds.length === 0} onClick={handleRefund}>
+          Devolver entrada{conditionalS}
+        </Button>
       </div>
     </div>
   );

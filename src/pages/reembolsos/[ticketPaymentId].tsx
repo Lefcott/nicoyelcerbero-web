@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout/index";
+import RefundForm from "@/components/RefundForm";
 import {
   getTicketPayment,
   getTicketPaymentIds,
@@ -34,7 +35,7 @@ export default function Refund({ ticketPayment }) {
       <Script src="https://sdk.mercadopago.com/js/v2" />
       <Layout>
         <div className="flex flex-col justify-start">
-          Devolver entradas {ticketPayment._id}
+          <RefundForm />
         </div>
       </Layout>
     </>

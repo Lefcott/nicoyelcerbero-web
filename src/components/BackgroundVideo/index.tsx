@@ -7,7 +7,7 @@ export default function BackgroundVideo() {
       loop
     >
       <source
-        src="https://res.cloudinary.com/datmyqnul/video/upload/v1674690961/oxidado_sin_sonido_pemxvr.mp4"
+        src="https://dl.dropboxusercontent.com/s/9z4jl4ekfsweq0n/oxidado_sin_sonido.mp4?dl=0"
         type="video/mp4"
       />
     </video>

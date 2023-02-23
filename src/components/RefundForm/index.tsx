@@ -1,10 +1,11 @@
+import { createRefund } from "@/services/api/ticketPayments";
 import { useTicketPaymentStore } from "@/store/ticketPayment";
 import { useState } from "react";
 import sweetAlert from "sweetalert2";
 import Button from "../Button";
 import { getSelectedGuests } from "./utils";
 
-export default function RefundForm() {
+export default function RefundForm({ token }) {
   const ticketPayment = useTicketPaymentStore((state) => state);
   const [selectedGuestIndexes, setSelectedGuestIndexes] = useState({});
   const selectedGuests = getSelectedGuests(
@@ -38,7 +39,11 @@ export default function RefundForm() {
       })
       .then(({ isConfirmed }) => {
         if (isConfirmed) {
-          console.log("Devolver");
+          createRefund(ticketPayment._id, selectedGuestIds, token)
+            .then(() => {
+              console.log("success");
+            })
+            .catch(console.error);
         }
       });
   };

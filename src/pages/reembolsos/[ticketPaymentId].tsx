@@ -7,6 +7,7 @@ import {
 import "@/sockets/showDetailsPage";
 import { useTicketPaymentStore } from "@/store/ticketPayment";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import Script from "next/script";
 import { useEffect, useRef } from "react";
 import NotFoundPage from "../404";
@@ -14,6 +15,8 @@ import NotFoundPage from "../404";
 export default function Refund({ ticketPayment }) {
   const ticketPaymentFromStore = useTicketPaymentStore((state) => state);
   const firstRenderRef = useRef(true);
+  const router = useRouter();
+  const { token } = router.query;
 
   if (firstRenderRef.current) {
     ticketPaymentFromStore.update(ticketPayment);
@@ -35,7 +38,7 @@ export default function Refund({ ticketPayment }) {
       <Script src="https://sdk.mercadopago.com/js/v2" />
       <Layout>
         <div className="flex flex-col justify-start">
-          <RefundForm />
+          <RefundForm token={token} />
         </div>
       </Layout>
     </>

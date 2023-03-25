@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import Script from "next/script";
 import { useEffect, useRef } from "react";
 import NotFoundPage from "../404";
+import "@/sockets/refundPage";
 
 export default function Refund({ ticketPayment }) {
   const ticketPaymentFromStore = useTicketPaymentStore((state) => state);

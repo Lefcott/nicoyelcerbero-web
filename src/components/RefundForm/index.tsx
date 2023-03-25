@@ -1,6 +1,6 @@
 import { createRefund } from "@/services/api/ticketPayments";
 import { useTicketPaymentStore } from "@/store/ticketPayment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import sweetAlert from "sweetalert2";
 import Button from "../Button";
 import { getSelectedGuests } from "./utils";
@@ -17,11 +17,14 @@ export default function RefundForm({ token }) {
     (guest) => `${guest.firstName} ${guest.lastName}`
   );
   const conditionalS = selectedGuestIds.length > 1 ? "s" : "";
+  const conditionalN = selectedGuestIds.length > 1 ? "n" : "";
 
-  const switchGuestSelected = (index) => {
+  const switchGuestSelected = (...indexes) => {
     setSelectedGuestIndexes({
       ...selectedGuestIndexes,
-      [index]: !selectedGuestIndexes[index],
+      ...Object.fromEntries(
+        indexes.map((index) => [index, !selectedGuestIndexes[index]])
+      ),
     });
   };
 
@@ -41,12 +44,45 @@ export default function RefundForm({ token }) {
         if (isConfirmed) {
           createRefund(ticketPayment._id, selectedGuestIds, token)
             .then(() => {
-              console.log("success");
+              sweetAlert.fire({
+                title: `Entrada${conditionalS} devuelta${conditionalS}`,
+                text: `La${conditionalS} entrada${conditionalS} de ${selectedGuestNames.join(
+                  ", "
+                )} ha${conditionalN} sido devuelta${conditionalS} con éxito.`,
+                icon: "success",
+              });
             })
-            .catch(console.error);
+            .catch((error) => {
+              if (error.response.data.code === "ticketsAlreadyRefunded") {
+                sweetAlert.fire({
+                  title: `Entrada${conditionalS} devuelta${conditionalS}`,
+                  text: `La${conditionalS} entrada${conditionalS} de ${error.response.data.refundedGuests.join(
+                    ", "
+                  )} ya ha${conditionalN} sido devuelta${conditionalS}.`,
+                  icon: "warning",
+                });
+              }
+            });
         }
       });
   };
+
+  useEffect(() => {
+    const guestIndexes = ticketPayment.guests
+      .map((guest) => {
+        const isSelected = selectedGuestIds.includes(guest._id);
+        if (!guest.cancelled || !isSelected) {
+          return null;
+        }
+        const guestIndex = ticketPayment.guests.findIndex(
+          (_guest) => _guest._id === guest._id
+        );
+        return guestIndex !== -1 ? guestIndex : null;
+      })
+      .filter((index) => index !== null);
+
+    switchGuestSelected(...guestIndexes);
+  }, [ticketPayment]);
 
   return (
     <div className="flex flex-col items-center">
@@ -67,17 +103,22 @@ export default function RefundForm({ token }) {
               className="bg-green-600 w-full h-14 flex justify-center items-center rounded-md space-x-2 cursor-pointer transition-[0.4s]"
               style={{
                 ...(selected ? {} : { opacity: 0.7 }),
+                ...(guest.cancelled ? { cursor: "default", opacity: 0.5 } : {}),
               }}
-              onClick={() => switchGuestSelected(i)}
+              onClick={() => !guest.cancelled && switchGuestSelected(i)}
             >
               <input
                 type="checkbox"
                 className="w-5 h-5 cursor-pointer"
                 checked={selected}
-                onChange={() => switchGuestSelected(i)}
+                onChange={() => !guest.cancelled && switchGuestSelected(i)}
+                style={{
+                  ...(guest.cancelled ? { cursor: "default" } : {}),
+                }}
               />
               <div className="select-none">
-                {guest.firstName} {guest.lastName}
+                {guest.firstName} {guest.lastName}{" "}
+                {guest.cancelled ? " (entrada devuelta)" : ""}
               </div>
             </div>
           );

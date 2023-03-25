@@ -4,7 +4,6 @@ import {
   getTicketPayment,
   getTicketPaymentIds,
 } from "@/services/api/ticketPayments";
-import "@/sockets/showDetailsPage";
 import { useTicketPaymentStore } from "@/store/ticketPayment";
 import Head from "next/head";
 import { useRouter } from "next/router";

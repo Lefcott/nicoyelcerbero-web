@@ -6,7 +6,7 @@ export default function NotFoundPage() {
   return (
     <>
       <Head>
-        <title>Nico y El Cerbero - página no encontrada</title>
+        <title>Ácidamente - página no encontrada</title>
       </Head>
       <Layout>
         <div className="flex flex-col items-center">

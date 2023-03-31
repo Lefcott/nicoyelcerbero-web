@@ -30,7 +30,7 @@ export default function ShowDetails({ show }) {
   return (
     <>
       <Head>
-        <title>Nico y El Cerbero - comprar entradas</title>
+        <title>Ácidamente - comprar entradas</title>
       </Head>
       <Script src="https://sdk.mercadopago.com/js/v2" />
       <Layout>

@@ -11,7 +11,7 @@ export default function ShowCard({ show }) {
         src={show.flyerUrl}
         fill
         className="rounded-md"
-        alt={`Nico y El Cerbero - ${show.date}`}
+        alt={`Ácidamente - ${show.date}`}
       />
     </Link>
   );

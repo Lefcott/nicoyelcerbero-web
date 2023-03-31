@@ -7,7 +7,7 @@ export default function Home({ shows }) {
   return (
     <>
       <Head>
-        <title>Nico y El Cerbero - shows</title>
+        <title>Ácidamente - shows</title>
       </Head>
       <Layout>
         <div className="mt-16">

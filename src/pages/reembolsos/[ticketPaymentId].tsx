@@ -33,7 +33,7 @@ export default function Refund({ ticketPayment }) {
   return (
     <>
       <Head>
-        <title>Nico y El Cerbero - devolver entradas</title>
+        <title>Ácidamente - devolver entradas</title>
       </Head>
       <Script src="https://sdk.mercadopago.com/js/v2" />
       <Layout>

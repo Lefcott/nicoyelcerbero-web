@@ -7,7 +7,7 @@ export default function BackgroundVideo() {
       loop
     >
       <source
-        src="https://dl.dropboxusercontent.com/s/9z4jl4ekfsweq0n/oxidado_sin_sonido.mp4?dl=0"
+        src="https://res.cloudinary.com/dua355asm/video/upload/v1680276950/Demencia_sin_sonido_ixqt3o.mp4"
         type="video/mp4"
       />
     </video>

@@ -29,6 +29,18 @@ const EmailVerificationModal = ({ email, open, onClose, onPass }) => {
     ]);
   };
 
+  const handleKeyDown = (e, index) => {
+    if (
+      e.key === "Backspace" &&
+      e.target.value === "" &&
+      e.target.previousElementSibling
+    ) {
+      e.target.previousElementSibling.value = "";
+      e.target.previousElementSibling.focus();
+      handleChangeDigit(e, index);
+    }
+  };
+
   const submitCode = async (code?: string) => {
     const completeCode = code || codes.join("");
 
@@ -105,6 +117,7 @@ const EmailVerificationModal = ({ email, open, onClose, onPass }) => {
                   maxLength={1}
                   value={code}
                   onChange={(e) => handleChangeDigit(e, index)}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
                   autoFocus={index === 0}
                   onPaste={(e) => handlePaste(e, index)}
                 />

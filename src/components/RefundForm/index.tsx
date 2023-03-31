@@ -7,6 +7,7 @@ import { getSelectedGuests } from "./utils";
 
 export default function RefundForm({ token }) {
   const ticketPayment = useTicketPaymentStore((state) => state);
+  const [executing, setExecuting] = useState(false);
   const [selectedGuestIndexes, setSelectedGuestIndexes] = useState({});
   const selectedGuests = getSelectedGuests(
     ticketPayment.guests,
@@ -42,6 +43,7 @@ export default function RefundForm({ token }) {
       })
       .then(({ isConfirmed }) => {
         if (isConfirmed) {
+          setExecuting(true);
           createRefund(ticketPayment._id, selectedGuestIds, token)
             .then(() => {
               sweetAlert.fire({
@@ -62,6 +64,9 @@ export default function RefundForm({ token }) {
                   icon: "warning",
                 });
               }
+            })
+            .finally(() => {
+              setExecuting(false);
             });
         }
       });
@@ -125,7 +130,10 @@ export default function RefundForm({ token }) {
         })}
       </div>
       <div className="mt-10">
-        <Button disabled={selectedGuestIds.length === 0} onClick={handleRefund}>
+        <Button
+          disabled={selectedGuestIds.length === 0 || executing}
+          onClick={handleRefund}
+        >
           Devolver entrada{conditionalS}
         </Button>
       </div>

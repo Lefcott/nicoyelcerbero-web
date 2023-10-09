@@ -34,7 +34,7 @@ export default function ShowDetails({ show }) {
       </Head>
       <Script src="https://sdk.mercadopago.com/js/v2" />
       <Layout>
-        <div className="flex flex-col justify-start">
+        <div className="flex flex-col justify-start w-full md:w-fit">
           <ShowBanner />
           <div className="mt-5 px-8 md:px-0">
             <ShowInfo />

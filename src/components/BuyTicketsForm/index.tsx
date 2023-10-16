@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import sweetAlert from "sweetalert2";
 import Button from "../Button";
 import TextInput from "../TextInput";
@@ -8,7 +8,6 @@ import TicketSelector from "./TicketsSelector";
 import mercadoPagoImage from "../../../public/mercado_pago_icon.png";
 import { openCheckout } from "@/utils/mercadoPago";
 import { createTicketPayment } from "@/services/api/ticketPayments";
-import Spinner from "../Spinner";
 import { validateTicketsForm } from "./utils";
 import { getFee } from "@/utils/getFee";
 import { useShowStore } from "@/store/show";
@@ -119,7 +118,10 @@ export default function BuyTicketsForm() {
       </div>
       <div className="m-6 space-x-5">
         <span className="mr-6">Email</span>
-        <TextInput onChange={(e) => setEmail(e.target.value)} value={email} />
+        <TextInput
+          onChange={(e) => setEmail(e.target.value?.trim())}
+          value={email}
+        />
       </div>
       <div className="mt-20">
         {guestAuxArray.map((_, i) => (

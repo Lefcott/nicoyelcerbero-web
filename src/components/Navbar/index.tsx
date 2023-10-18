@@ -8,24 +8,21 @@ export default function Navbar() {
         <Image src="/logo.png" width={42} height={42} alt="Ácidamente" />
         <span>Ácidamente</span>
       </Link>
-      <Link href="https://www.instagram.com/_acidamente/" target="_blank">
+      <Link href="https://linktw.in/JWwDQW" target="_blank">
         <img
           src="/social-media-icons/instagram.png"
           alt="Ácidamente Instagram"
           className="w-6 h-6"
         ></img>
       </Link>
-      <Link
-        href="https://open.spotify.com/intl-es/artist/4nG31Ehhwr15bsXYf8GlRG?si=3q8SdxWyQSWdGsGtDh8Cvg"
-        target="_blank"
-      >
+      <Link href="https://linktw.in/bXiYeN" target="_blank">
         <img
           src="/social-media-icons/spotify.webp"
           alt="Ácidamente Spotify"
           className="w-6 h-6"
         ></img>
       </Link>
-      <Link href="https://www.youtube.com/@_acidamente" target="_blank">
+      <Link href="https://linktw.in/JShdAO" target="_blank">
         <img
           src="/social-media-icons/youtube.png"
           alt="Ácidamente YouTube"
@@ -39,7 +36,7 @@ export default function Navbar() {
           className="w-6 h-6"
         ></img>
       </Link>
-      <Link href="https://wa.link/hmh0xp" target="_blank">
+      <Link href="https://linktw.in/dokrFQ" target="_blank">
         <img
           src="/social-media-icons/whatsapp.webp"
           alt="Ácidamente WhatsApp"

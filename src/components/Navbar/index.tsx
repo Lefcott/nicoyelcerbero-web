@@ -36,7 +36,7 @@ export default function Navbar() {
           className="w-6 h-6"
         ></img>
       </Link>
-      <Link href="https://linktw.in/dokrFQ" target="_blank">
+      <Link href="https://wa.link/hmh0xp" target="_blank">
         <img
           src="/social-media-icons/whatsapp.webp"
           alt="Ácidamente WhatsApp"

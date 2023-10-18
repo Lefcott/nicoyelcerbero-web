@@ -34,6 +34,9 @@ export const LocationPhotos = () => {
   };
 
   const closeImage = (fromNavigation: boolean) => {
+    if (imageIndex === -1) {
+      return;
+    }
     createEvent(
       "ClosePhoto",
       `from navigation: ${fromNavigation}, url: ${show.locationPhotos[imageIndex]}`

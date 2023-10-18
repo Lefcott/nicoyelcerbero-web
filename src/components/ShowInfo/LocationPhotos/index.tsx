@@ -6,6 +6,7 @@ export const LocationPhotos = () => {
   const show = useShowStore((state) => state);
   const [imageIndex, setImageIndex] = useState<number>(-1);
   const selectedImage = show.locationPhotos[imageIndex];
+  const firstPhotos = show.locationPhotos.slice(0, 3);
 
   const handleOpenImage = (index) => {
     setImageIndex(index);
@@ -18,7 +19,7 @@ export const LocationPhotos = () => {
     <div className="flex flex-col items-center">
       <span>Fotos del lugar</span>
       <div className="flex gap-2 mt-3">
-        {show.locationPhotos.map((photo, i) => (
+        {firstPhotos.map((photo, i) => (
           <img
             key={i}
             src={photo}

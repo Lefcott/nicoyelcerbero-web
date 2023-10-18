@@ -4,10 +4,12 @@ import {
   faTicket,
   faLocationDot,
   faUser,
+  faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useShowStore } from "@/store/show";
 import { LocationPhotos } from "./LocationPhotos";
+import { cleanPath } from "@/utils/cleanPath";
 
 export default function ShowInfo() {
   const show = useShowStore((state) => state);
@@ -50,16 +52,24 @@ export default function ShowInfo() {
           </span>
         </div>
       )}
-      {
-        <div className="flex items-center space-x-4">
-          <FontAwesomeIcon icon={faUser} />
-          <span className="text-base pl-[6px]">
-            {show.onlyAdults
-              ? "Evento para mayores de 18 años"
-              : "Evento apto para todo público"}
-          </span>
-        </div>
-      }
+      <div className="flex items-center space-x-4">
+        <FontAwesomeIcon icon={faUser} />
+        <span className="text-base pl-[6px]">
+          {show.onlyAdults
+            ? "Evento para mayores de 18 años"
+            : "Evento apto para todo público"}
+        </span>
+      </div>
+      <div className="flex items-center space-x-4">
+        <FontAwesomeIcon icon={faVideo} />
+        <Link
+          href="#videos-de-shows-anteriores"
+          className="text-base pl-[2.5px] text-teal-400"
+          onClick={cleanPath}
+        >
+          Ver videos de shows anteriores
+        </Link>
+      </div>
       <div className="mt-3">
         <LocationPhotos />
       </div>

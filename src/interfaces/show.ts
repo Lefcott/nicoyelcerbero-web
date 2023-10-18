@@ -15,6 +15,7 @@ export interface ShowInterface {
   addressUrl: string;
   onlyAdults: boolean;
   locationPhotos: string[];
+  previousShows: { videoUrl: string; title: string; linkTwUrl?: string }[];
   guests: GuestInterface[];
   feePayer: "buyer" | "seller" | "both";
 }

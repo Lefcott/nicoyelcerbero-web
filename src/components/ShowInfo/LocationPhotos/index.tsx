@@ -15,15 +15,15 @@ export const LocationPhotos = () => {
   useNavigationButtonDetect(() => setImageIndex(-1));
 
   return (
-    <>
-      <span>Fotos del lugar:</span>
+    <div className="flex flex-col items-center">
+      <span>Fotos del lugar</span>
       <div className="flex gap-2 mt-3">
         {show.locationPhotos.map((photo, i) => (
           <img
             key={i}
             src={photo}
             alt="Foto de concierto"
-            className="max-w-[calc(33%-5px)] md:max-w-[250px] h-auto rounded-md shadow-[0px_2px_40px_1px_black] cursor-pointer duration-300 hover:scale-105"
+            className="max-w-[calc(33%-5px)] md:max-w-[200px] h-auto rounded-md shadow-[0px_2px_40px_1px_black] cursor-pointer duration-300 hover:scale-105"
             onClick={() => handleOpenImage(i)}
           />
         ))}
@@ -61,6 +61,6 @@ export const LocationPhotos = () => {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };

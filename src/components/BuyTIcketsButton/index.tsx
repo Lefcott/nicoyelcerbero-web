@@ -1,12 +1,9 @@
+import { cleanPath } from "@/utils/cleanPath";
 import Button from "../Button";
 
 export default function BuyTicketsButton() {
-  const handleClick = () => {
-    history.replaceState({}, document.title, window.location.pathname);
-  };
-
   return (
-    <Button isLink href="#comprar-entradas" onClick={handleClick}>
+    <Button isLink href="#comprar-entradas" onClick={cleanPath}>
       Comprar entradas
     </Button>
   );

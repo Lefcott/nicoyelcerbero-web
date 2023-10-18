@@ -10,6 +10,8 @@ import Head from "next/head";
 import Script from "next/script";
 import { useEffect, useRef } from "react";
 import NotFoundPage from "./404";
+import Link from "next/link";
+import { PreviousShows } from "@/components/PreviousShows";
 
 export default function ShowDetails({ show }) {
   const showFromStore = useShowStore((state) => state);
@@ -34,7 +36,7 @@ export default function ShowDetails({ show }) {
       </Head>
       <Script src="https://sdk.mercadopago.com/js/v2" />
       <Layout>
-        <div className="flex flex-col justify-start w-full md:w-fit">
+        <div className="flex flex-col justify-start w-full md:w-fit items-center">
           <ShowBanner />
           <div className="mt-5 px-8 md:px-0">
             <ShowInfo />
@@ -44,7 +46,10 @@ export default function ShowDetails({ show }) {
               <div className="mt-5 px-8 md:px-0">
                 <BuyTicketsButton />
               </div>
-              <div className="mt-96 px-8 md:px-0">
+              <div className="mt-20 px-8 md:px-0 flex justify-center">
+                <PreviousShows />
+              </div>
+              <div className="mt-20 px-8 md:px-0">
                 <BuyTicketsForm />
               </div>
             </>

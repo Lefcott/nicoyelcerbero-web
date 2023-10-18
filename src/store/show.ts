@@ -23,6 +23,7 @@ export const useShowStore = create<ShowStore>()(
       locationName: "",
       onlyAdults: true,
       locationPhotos: [],
+      previousShows: [],
       indoorPrice: 0,
       presalePrice: 0,
       update: (properties) => set({ ...properties }),

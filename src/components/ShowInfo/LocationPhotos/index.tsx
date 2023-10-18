@@ -38,11 +38,27 @@ export const LocationPhotos = () => {
             />
           </div>
           <div
-            className="fixed right-0 top-0 mt-8 mr-8 text-6xl select-none cursor-pointer"
+            className="fixed right-0 top-0 mt-8 mr-8 text-4xl select-none cursor-pointer"
             onClick={() => setImageIndex(-1)}
           >
             ✖
           </div>
+          {imageIndex < show.locationPhotos.length - 1 && (
+            <div
+              className="fixed right-0 top-[50vh] translate-y-[-50%] mr-8 text-4xl select-none cursor-pointer"
+              onClick={() => setImageIndex(imageIndex + 1)}
+            >
+              ➜
+            </div>
+          )}
+          {imageIndex > 0 && (
+            <div
+              className="fixed left-0 top-[50vh] translate-y-[-50%] rotate-180 ml-8 text-4xl select-none cursor-pointer"
+              onClick={() => setImageIndex(imageIndex - 1)}
+            >
+              ➜
+            </div>
+          )}
         </div>
       )}
     </>

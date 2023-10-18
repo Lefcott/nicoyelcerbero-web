@@ -107,7 +107,7 @@ export default function BuyTicketsForm() {
   const totalPrice = ticketsPrice + fee;
 
   return (
-    <div id="comprar-entradas" className="mb-96 flex flex-col items-center">
+    <div id="comprar-entradas" className="flex flex-col items-center">
       <h2 className="text-2xl pt-5">Cómo comprar entradas</h2>
       <div className="m-5 mt-1 max-w-sm">
         <span className="text-xs md:text-sm">
@@ -124,7 +124,7 @@ export default function BuyTicketsForm() {
           value={email}
         />
       </div>
-      <div className="m-6 mt-14 space-x-5">
+      <div className="m-6 mt-8 mb-0 space-x-5">
         <span>Cantidad de entradas</span>
         <TicketSelector
           value={ticketCount}
@@ -143,7 +143,7 @@ export default function BuyTicketsForm() {
           </div>
         ))}
       </div>
-      <div className="mt-16 w-[253px]">
+      <div className="mt-4 w-[253px]">
         {show.feePayer !== "seller" && (
           <>
             <div className="mb-2 space-x-5 flex justify-between">

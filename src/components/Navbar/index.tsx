@@ -29,13 +29,6 @@ export default function Navbar() {
           className="w-6 h-6"
         ></img>
       </Link>
-      <Link href="mailto:acidamente.banda@gmail.com" target="_blank">
-        <img
-          src="/social-media-icons/gmail.ico"
-          alt="Ácidamente Gmail"
-          className="w-6 h-6"
-        ></img>
-      </Link>
       <Link href="https://wa.link/hmh0xp" target="_blank">
         <img
           src="/social-media-icons/whatsapp.webp"

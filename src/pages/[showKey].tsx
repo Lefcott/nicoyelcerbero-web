@@ -10,10 +10,13 @@ import Head from "next/head";
 import Script from "next/script";
 import { useEffect, useRef } from "react";
 import NotFoundPage from "./404";
-import Link from "next/link";
 import { PreviousShows } from "@/components/PreviousShows";
+import { FeedbackForm } from "@/components/FeedbackForm";
+import { useRouter } from "next/router";
 
 export default function ShowDetails({ show }) {
+  const router = useRouter();
+  const { query } = router;
   const showFromStore = useShowStore((state) => state);
   const firstRenderRef = useRef(true);
 
@@ -52,6 +55,12 @@ export default function ShowDetails({ show }) {
               <div className="mt-20 px-0 md:px-0">
                 <BuyTicketsForm />
               </div>
+              {query.fromAd === "true" && (
+                <div className="mt-20 px-0 md:px-0">
+                  <FeedbackForm />
+                </div>
+              )}
+              <div className="mb-96"></div>
             </>
           )}
         </div>

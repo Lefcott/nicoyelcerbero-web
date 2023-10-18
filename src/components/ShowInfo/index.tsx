@@ -67,7 +67,7 @@ export default function ShowInfo() {
           className="text-base pl-[2.5px] text-teal-400"
           onClick={cleanPath}
         >
-          Ver videos de shows anteriores
+          Ver videos de nuestros shows anteriores
         </Link>
       </div>
       <div className="mt-3">

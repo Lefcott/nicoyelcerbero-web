@@ -108,13 +108,14 @@ export default function BuyTicketsForm() {
 
   return (
     <div id="comprar-entradas" className="mb-96">
-      <h2 className="text-4xl">Comprar entradas</h2>
-      <div className="m-6 space-x-5">
-        <span>Cantidad</span>
-        <TicketSelector
-          value={ticketCount}
-          onChange={(e) => setTicketCount(e.target.value)}
-        />
+      <h2 className="text-2xl">Cómo comprar entradas</h2>
+      <div className="m-5 mt-1 max-w-sm">
+        <span className="text-xs md:text-sm">
+          Completá el formulario de abajo y hacé click en{" "}
+          <b>Comprar con Mercado Pago</b>. Una vez realizado el pago, te va a
+          llegar un correo avisando que estás anotado en la lista de invitados.
+          En el día del show, vas a poder entrar con tu nombre y apellido.
+        </span>
       </div>
       <div className="m-6 space-x-5">
         <span className="mr-6">Email</span>
@@ -123,7 +124,14 @@ export default function BuyTicketsForm() {
           value={email}
         />
       </div>
-      <div className="mt-20">
+      <div className="m-6 mt-14 space-x-5">
+        <span>Cantidad de entradas</span>
+        <TicketSelector
+          value={ticketCount}
+          onChange={(e) => setTicketCount(e.target.value)}
+        />
+      </div>
+      <div>
         {guestAuxArray.map((_, i) => (
           <div className="m-6 space-x-5" key={i}>
             <GuestInfo
@@ -135,7 +143,7 @@ export default function BuyTicketsForm() {
           </div>
         ))}
       </div>
-      <div className="mt-28 w-[253px]">
+      <div className="mt-16 w-[253px]">
         {show.feePayer !== "seller" && (
           <>
             <div className="mb-2 space-x-5 flex justify-between">
@@ -156,7 +164,7 @@ export default function BuyTicketsForm() {
           <span className="mr-6">$ {totalPrice.toFixed(2)}</span>
         </div>
       </div>
-      <div className="mt-4">
+      <div>
         <Button
           onClick={handleBuy}
           disabled={sendingEmail || creatingTicketPayment}

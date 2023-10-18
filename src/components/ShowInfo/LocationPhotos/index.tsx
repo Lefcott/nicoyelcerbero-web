@@ -13,7 +13,7 @@ export const LocationPhotos = () => {
             <img
               src={photo}
               alt="Foto de concierto"
-              className="max-w-[calc(33%-5px)] rounded-md shadow-[0px_2px_40px_1px_black]"
+              className="max-w-[calc(33%-5px)] md:max-w-[250px] h-auto rounded-md shadow-[0px_2px_40px_1px_black]"
             />
           </>
         ))}

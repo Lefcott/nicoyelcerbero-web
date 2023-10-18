@@ -13,6 +13,7 @@ import NotFoundPage from "./404";
 import { PreviousShows } from "@/components/PreviousShows";
 import { FeedbackForm } from "@/components/FeedbackForm";
 import { useRouter } from "next/router";
+import { createEvent } from "@/services/api/events";
 
 export default function ShowDetails({ show }) {
   const router = useRouter();
@@ -27,6 +28,12 @@ export default function ShowDetails({ show }) {
   useEffect(() => {
     firstRenderRef.current = false;
   }, []);
+
+  useEffect(() => {
+    if (query.fromAd === "true") {
+      createEvent("PageOpenedFromAd");
+    }
+  }, [query.fromAd]);
 
   if (!show) {
     return <NotFoundPage />;

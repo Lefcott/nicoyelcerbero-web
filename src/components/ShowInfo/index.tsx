@@ -18,7 +18,7 @@ export default function ShowInfo() {
     <>
       <div className="flex items-center space-x-4 mb-4">
         <FontAwesomeIcon icon={faCalendarDay} />
-        <h1 className="text-2xl">{show.date}</h1>
+        <h1 className="text-2xl pl-1">{show.date}</h1>
       </div>
       <div className="flex items-center space-x-4">
         <FontAwesomeIcon icon={faLocationDot} />

@@ -1,3 +1,4 @@
+import { createEvent } from "@/services/api/events";
 import { isEmail } from "@/utils/isEmail";
 import sweetAlert from "sweetalert2";
 
@@ -16,6 +17,7 @@ export const validateTicketsForm = (email: string, guests: Guest[]) => {
       icon: "warning",
       confirmButtonColor: "#3085d6",
     });
+    createEvent("BuyButtonClicked", "error: invalid email");
     return false;
   }
 
@@ -30,6 +32,7 @@ export const validateTicketsForm = (email: string, guests: Guest[]) => {
         icon: "warning",
         confirmButtonColor: "#3085d6",
       });
+      createEvent("BuyButtonClicked", "error: person's first name not entered");
       return false;
     }
     if (!guest.lastName) {
@@ -41,6 +44,7 @@ export const validateTicketsForm = (email: string, guests: Guest[]) => {
         icon: "warning",
         confirmButtonColor: "#3085d6",
       });
+      createEvent("BuyButtonClicked", "error: person's last name not entered");
       return false;
     }
   }

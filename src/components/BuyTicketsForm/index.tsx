@@ -13,6 +13,7 @@ import { getFee } from "@/utils/getFee";
 import { useShowStore } from "@/store/show";
 import EmailVerificationModal from "../EmailVerificationModal";
 import { createVerificationCode } from "@/services/api/verificationCodes";
+import { createEvent } from "@/services/api/events";
 
 export default function BuyTicketsForm() {
   const show = useShowStore((state) => state);
@@ -44,20 +45,23 @@ export default function BuyTicketsForm() {
     setCreatingTicketPayment(true);
 
     try {
+      createEvent("CreatingTicketPayment");
       const ticketPayment = await createTicketPayment(
         show.key,
         email,
         filteredGuests
       );
 
+      createEvent("OpeningCheckout");
       await openCheckout(ticketPayment.data.preferenceId);
-    } catch (error) {
+    } catch (error: any) {
       sweetAlert.fire({
         title: "Error",
         text: "Hubo un error al crear el pago con mercad pago.",
         icon: "error",
         confirmButtonColor: "#3085d6",
       });
+      createEvent("ErrorCreatingTicketPayment", `error: ${error.message}`);
       console.error(error);
     }
     setCreatingTicketPayment(false);
@@ -73,14 +77,16 @@ export default function BuyTicketsForm() {
     setSendingEmail(true);
 
     try {
+      createEvent("SendingVerificationCode");
       await createVerificationCode(email);
-    } catch (error) {
+    } catch (error: any) {
       sweetAlert.fire({
         title: "Error",
         text: "Hubo un error al enviar el código de verificación.",
         icon: "error",
         confirmButtonColor: "#3085d6",
       });
+      createEvent("SendingVerificationCode", `error: ${error.message}`);
       console.error(error);
     }
 

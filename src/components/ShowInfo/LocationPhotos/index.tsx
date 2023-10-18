@@ -1,4 +1,5 @@
 import useNavigationButtonDetect from "@/hooks/useNavigationButtonDetect";
+import { createEvent } from "@/services/api/events";
 import { useShowStore } from "@/store/show";
 import { useState } from "react";
 
@@ -11,9 +12,36 @@ export const LocationPhotos = () => {
   const handleOpenImage = (index) => {
     setImageIndex(index);
     window.history.pushState({}, "");
+    createEvent("PhotoOpened", `index: ${index}, url: ${firstPhotos[index]}`);
   };
 
-  useNavigationButtonDetect(() => setImageIndex(-1));
+  const goToNextImage = () => {
+    const newIndex = imageIndex + 1;
+    createEvent(
+      "NextPhoto",
+      `to index: ${newIndex}, url: ${show.locationPhotos[newIndex]}`
+    );
+    setImageIndex(newIndex);
+  };
+
+  const goToPreviousImage = () => {
+    const newIndex = imageIndex - 1;
+    createEvent(
+      "PreviousPhoto",
+      `to index: ${newIndex}, url: ${show.locationPhotos[newIndex]}`
+    );
+    setImageIndex(newIndex);
+  };
+
+  const closeImage = (fromNavigation: boolean) => {
+    createEvent(
+      "ClosePhoto",
+      `from navigation: ${fromNavigation}, url: ${show.locationPhotos[imageIndex]}`
+    );
+    setImageIndex(-1);
+  };
+
+  useNavigationButtonDetect(() => closeImage(true));
 
   return (
     <div className="flex flex-col items-center">
@@ -40,14 +68,14 @@ export const LocationPhotos = () => {
           </div>
           <div
             className="fixed right-0 top-0 mt-8 mr-8 text-4xl select-none cursor-pointer"
-            onClick={() => setImageIndex(-1)}
+            onClick={() => closeImage(false)}
           >
             ✖
           </div>
           {imageIndex < show.locationPhotos.length - 1 && (
             <div
               className="fixed right-0 top-[50vh] translate-y-[-50%] mr-8 text-4xl select-none cursor-pointer"
-              onClick={() => setImageIndex(imageIndex + 1)}
+              onClick={goToNextImage}
             >
               ➜
             </div>
@@ -55,7 +83,7 @@ export const LocationPhotos = () => {
           {imageIndex > 0 && (
             <div
               className="fixed left-0 top-[50vh] translate-y-[-50%] rotate-180 ml-8 text-4xl select-none cursor-pointer"
-              onClick={() => setImageIndex(imageIndex - 1)}
+              onClick={goToPreviousImage}
             >
               ➜
             </div>

@@ -10,9 +10,15 @@ import Link from "next/link";
 import { useShowStore } from "@/store/show";
 import { LocationPhotos } from "./LocationPhotos";
 import { cleanPath } from "@/utils/cleanPath";
+import { createEvent } from "@/services/api/events";
 
 export default function ShowInfo() {
   const show = useShowStore((state) => state);
+
+  const handleSeeVideosClick = () => {
+    cleanPath();
+    createEvent("SeeVideosLinkClicked");
+  };
 
   return (
     <>
@@ -24,7 +30,11 @@ export default function ShowInfo() {
         <FontAwesomeIcon icon={faLocationDot} />
         <span className="text-sm pl-2">
           {show.locationName} (
-          <Link href={show.addressUrl} target="_blank">
+          <Link
+            href={show.addressUrl}
+            target="_blank"
+            onClick={() => createEvent("LocationLinkClicked")}
+          >
             <span className="text-teal-400">{show.address}</span>
           </Link>
           )
@@ -65,7 +75,7 @@ export default function ShowInfo() {
         <Link
           href="#videos-de-shows-anteriores"
           className="text-sm pl-[2.5px] text-teal-400"
-          onClick={cleanPath}
+          onClick={handleSeeVideosClick}
         >
           Ver videos de nuestros shows anteriores
         </Link>

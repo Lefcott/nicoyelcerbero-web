@@ -1,3 +1,4 @@
+import { createEvent } from "@/services/api/events";
 import { useShowStore } from "@/store/show";
 import { getThumbnailUrl } from "@/utils/getThumbnail";
 import Link from "next/link";
@@ -15,6 +16,7 @@ export const PreviousShows = () => {
               href={previousShow.linkTwUrl || previousShow.videoUrl}
               target="_blank"
               className="relative w-36 h-[81px] md:w-48 md:h-[108px] duration-300 hover:scale-105" // h = w * 0.5625068060546663
+              onClick={() => createEvent("VideoClicked", previousShow.videoUrl)}
             >
               <img
                 src={getThumbnailUrl(previousShow.videoUrl)}

@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useShowStore } from "@/store/show";
+import { LocationPhotos } from "./LocationPhotos";
 
 export default function ShowInfo() {
   const show = useShowStore((state) => state);
@@ -15,11 +16,11 @@ export default function ShowInfo() {
     <>
       <div className="flex items-center space-x-4 mb-4">
         <FontAwesomeIcon icon={faCalendarDay} />
-        <h1 className="text-4xl">{show.date}</h1>
+        <h1 className="text-2xl">{show.date}</h1>
       </div>
       <div className="flex items-center space-x-4">
         <FontAwesomeIcon icon={faLocationDot} />
-        <span className="text-lg pl-2">
+        <span className="text-base pl-2">
           {show.locationName} (
           <Link href={show.addressUrl} target="_blank">
             <span className="text-teal-400">{show.address}</span>
@@ -59,6 +60,9 @@ export default function ShowInfo() {
           </span>
         </div>
       }
+      <div className="mt-3">
+        <LocationPhotos />
+      </div>
     </>
   );
 }

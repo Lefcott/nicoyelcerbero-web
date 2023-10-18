@@ -14,6 +14,7 @@ export interface ShowInterface {
   address: string;
   addressUrl: string;
   onlyAdults: boolean;
+  locationPhotos: string[];
   guests: GuestInterface[];
   feePayer: "buyer" | "seller" | "both";
 }

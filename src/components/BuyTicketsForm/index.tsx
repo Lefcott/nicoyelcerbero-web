@@ -107,7 +107,7 @@ export default function BuyTicketsForm() {
   const totalPrice = ticketsPrice + fee;
 
   return (
-    <div id="comprar-entradas" className="mb-96">
+    <div id="comprar-entradas" className="mb-96 flex flex-col items-center">
       <h2 className="text-2xl pt-5">Cómo comprar entradas</h2>
       <div className="m-5 mt-1 max-w-sm">
         <span className="text-xs md:text-sm">

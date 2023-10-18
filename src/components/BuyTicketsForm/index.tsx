@@ -108,7 +108,7 @@ export default function BuyTicketsForm() {
 
   return (
     <div id="comprar-entradas" className="mb-96">
-      <h2 className="text-2xl">Cómo comprar entradas</h2>
+      <h2 className="text-2xl pt-5">Cómo comprar entradas</h2>
       <div className="m-5 mt-1 max-w-sm">
         <span className="text-xs md:text-sm">
           Completá el formulario de abajo y hacé click en{" "}

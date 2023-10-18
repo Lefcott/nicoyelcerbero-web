@@ -28,7 +28,7 @@ export const PreviousShows = () => {
                   className="w-10 h-10 object-cover ml-2"
                 />
               </div>{" "}
-              <div className="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-[10px] md:text-xs text-center p-1">
+              <div className="absolute bottom-0 w-full bg-black bg-opacity-50 text-white text-[10px] md:text-xs text-center p-1 rounded-b-xl">
                 {previousShow.title}
               </div>
             </Link>

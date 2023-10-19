@@ -51,7 +51,7 @@ export const FeedbackForm = () => {
         </p>
         <textarea
           className="w-full h-40 md:h-60 rounded-sm text-black p-2"
-          placeholder="Compartí tu opinión acâ"
+          placeholder="Compartí tu opinión acá"
           value={opinion}
           onChange={(e) => setOpinion(e.target.value)}
         />

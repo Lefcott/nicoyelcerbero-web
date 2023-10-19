@@ -3,6 +3,7 @@ import sweetAlert from "sweetalert2";
 
 import { ShowStore, useShowStore } from "@/store/show";
 import { ShowInterface } from "@/interfaces/show";
+import { fromAd, pageVisitId } from "@/constants";
 
 let show: ShowStore;
 
@@ -11,7 +12,8 @@ useShowStore.subscribe((state) => {
 });
 
 const showDetailsPageSocket = io(
-  `${process.env.API_URL || ""}/showDetailsPage`
+  `${process.env.API_URL || ""}/showDetailsPage`,
+  { query: { pageVisitId: fromAd ? pageVisitId : "" } }
 );
 
 showDetailsPageSocket.on("showUpdated", (data: Partial<ShowInterface>) => {

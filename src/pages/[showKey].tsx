@@ -12,13 +12,13 @@ import { useEffect, useRef } from "react";
 import NotFoundPage from "./404";
 import { PreviousShows } from "@/components/PreviousShows";
 import { FeedbackForm } from "@/components/FeedbackForm";
-import { useRouter } from "next/router";
 import { createEvent } from "@/services/api/events";
+import { fromAd } from "@/constants";
+import { useFromAdStore } from "@/store/fromAd";
 
 export default function ShowDetails({ show }) {
-  const router = useRouter();
-  const { query } = router;
   const showFromStore = useShowStore((state) => state);
+  const fromAdStore = useFromAdStore((state) => state);
   const firstRenderRef = useRef(true);
 
   if (firstRenderRef.current) {
@@ -30,10 +30,12 @@ export default function ShowDetails({ show }) {
   }, []);
 
   useEffect(() => {
-    if (query.fromAd === "true") {
+    if (fromAdStore.fromAd) {
       createEvent("PageOpenedFromAd");
+    } else if (fromAd) {
+      fromAdStore.update(fromAd);
     }
-  }, [query.fromAd]);
+  }, [fromAdStore.fromAd]);
 
   if (!show) {
     return <NotFoundPage />;
@@ -62,7 +64,7 @@ export default function ShowDetails({ show }) {
               <div className="mt-20 px-0 md:px-0">
                 <BuyTicketsForm />
               </div>
-              {query.fromAd === "true" && (
+              {fromAdStore.fromAd && (
                 <div className="mt-20 px-0 md:px-0">
                   <FeedbackForm />
                 </div>

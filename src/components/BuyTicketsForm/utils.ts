@@ -17,7 +17,12 @@ export const validateTicketsForm = (email: string, guests: Guest[]) => {
       icon: "warning",
       confirmButtonColor: "#3085d6",
     });
-    createEvent("BuyButtonClicked", "error: invalid email");
+    createEvent(
+      "BuyButtonClicked",
+      `error: invalid email '${email}', guests: ${guests
+        .map((guest) => `${guest.firstName} ${guest.lastName}`)
+        .join(", ")}`
+    );
     return false;
   }
 

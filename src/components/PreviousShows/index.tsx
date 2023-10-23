@@ -10,12 +10,14 @@ export const PreviousShows = () => {
     <div id="videos-de-shows-anteriores" className="flex flex-col items-center">
       <h2 className="text-2xl pt-5">Nuestros shows anteriores</h2>
       <div className="flex justify-center md:justify-start md:px-52 mt-4 flex-wrap gap-x-3 gap-y-10 flex-[1_1_30%]">
-        {show.previousShows.map((previousShow) => (
-          <>
+        {show.previousShows.map((previousShow, i) => (
+          <div
+            key={i}
+            className="relative w-36 h-[81px] md:w-48 md:h-[108px] duration-300 hover:scale-105" // h = w * 0.5625068060546663
+          >
             <Link
               href={previousShow.linkTwUrl || previousShow.videoUrl}
               target="_blank"
-              className="relative w-36 h-[81px] md:w-48 md:h-[108px] duration-300 hover:scale-105" // h = w * 0.5625068060546663
               onClick={() => createEvent("VideoClicked", previousShow.videoUrl)}
             >
               <img
@@ -34,7 +36,7 @@ export const PreviousShows = () => {
                 {previousShow.title}
               </div>
             </Link>
-          </>
+          </div>
         ))}
       </div>
     </div>

@@ -9,7 +9,9 @@ const conversationSocket = io(`${process.env.API_URL || ""}/conversation`, {
 
 conversationSocket.on("newMessage", (message: MessageInterface) => {
   if (message.from !== useMessagesStore.getState().from) {
-    new Audio("/new-message.mp3").play();
+    if (typeof Audio !== "undefined") {
+      new Audio("/new-message.mp3").play();
+    }
     useMessagesStore.getState().addMessage(message);
   }
 });

@@ -18,4 +18,5 @@ export interface ShowInterface {
   previousShows: { videoUrl: string; title: string; linkTwUrl?: string }[];
   guests: GuestInterface[];
   feePayer: "buyer" | "seller" | "both";
+  chatEnabled?: boolean;
 }

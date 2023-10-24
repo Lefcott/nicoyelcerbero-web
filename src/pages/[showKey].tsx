@@ -5,6 +5,7 @@ import ShowBanner from "@/components/ShowBanner";
 import ShowInfo from "@/components/ShowInfo/index";
 import { getShow, getShows } from "@/services/api/shows";
 import "@/sockets/showDetailsPage";
+import "@/sockets/conversationSocket";
 import { useShowStore } from "@/store/show";
 import Head from "next/head";
 import Script from "next/script";
@@ -15,6 +16,7 @@ import { FeedbackForm } from "@/components/FeedbackForm";
 import { createEvent } from "@/services/api/events";
 import { fromAd } from "@/constants";
 import { useFromAdStore } from "@/store/fromAd";
+import { Chat } from "@/components/Chat";
 
 export default function ShowDetails({ show }) {
   const showFromStore = useShowStore((state) => state);
@@ -53,7 +55,8 @@ export default function ShowDetails({ show }) {
           <div className="mt-5 px-8 md:px-0">
             <ShowInfo />
           </div>
-          {!show.isFree && (
+          {(showFromStore.chatEnabled || show.chatEnabled) && <Chat />}
+          {!showFromStore.isFree && (
             <>
               <div className="mt-5 px-8 md:px-0">
                 <BuyTicketsButton />

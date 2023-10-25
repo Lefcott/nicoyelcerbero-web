@@ -8,5 +8,6 @@ export interface MessagesInterface {
   from: "user" | "admin";
   messages: MessageInterface[];
   unreadMessages: number;
+  newMessages: MessageInterface[];
   conversationId: string;
 }

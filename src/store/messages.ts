@@ -11,13 +11,25 @@ export const useMessagesStore = create<MessagesStore>()(
     (set) => ({
       messages: [],
       unreadMessages: 0,
+      newMessages: [],
       conversationId: "",
       from: "user",
       chatToken: "",
-      addMessage: (newMessage: MessageInterface) =>
+      addMessage: (newMessage: MessageInterface) => {
+        if (newMessage.from !== useMessagesStore.getState().from) {
+          set((prevState) => ({
+            newMessages: [...prevState.newMessages, newMessage],
+          }));
+          setTimeout(() => {
+            set({
+              newMessages: useMessagesStore.getState().newMessages.slice(1),
+            });
+          }, 4000);
+        }
         set((prevState) => ({
           messages: [...prevState.messages, newMessage],
-        })),
+        }));
+      },
     }),
     { name: "show-storage" }
   )

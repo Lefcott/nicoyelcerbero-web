@@ -1,10 +1,12 @@
 import { useMessagesStore } from "@/store/messages";
 import axios from "../../utils/axios";
 import { MessageInterface } from "@/interfaces/messages";
+import { pageVisitId } from "@/constants";
 
 export const createMessage = async (text: string) => {
   const { conversationId, chatToken, from } = useMessagesStore.getState();
   const response = await axios.post("/messages", {
+    pageVisitId,
     chatToken,
     from,
     text,

@@ -15,3 +15,12 @@ conversationSocket.on("newMessage", (message: MessageInterface) => {
     useMessagesStore.getState().addMessage(message);
   }
 });
+
+conversationSocket.on(
+  "newConversation",
+  ({ pageVisitId: _pageVisitId, conversationId }) => {
+    if (_pageVisitId === pageVisitId) {
+      useMessagesStore.setState({ conversationId });
+    }
+  }
+);

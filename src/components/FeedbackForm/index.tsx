@@ -47,7 +47,7 @@ export const FeedbackForm = () => {
         </p>
         <p className="text-sm">
           Dejanos saber para que podamos mejorar. Si tenés alguna consulta, no
-          dudes en contactarnos.
+          dudes en contactarnos por las redes o por el chat de esta página :)
         </p>
         <textarea
           className="w-full h-40 md:h-60 rounded-sm text-black p-2"

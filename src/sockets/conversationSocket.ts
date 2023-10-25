@@ -7,15 +7,21 @@ const conversationSocket = io(`${process.env.API_URL || ""}/conversation`, {
   query: { pageVisitId: fromAd ? pageVisitId : "" },
 });
 
-conversationSocket.on("newMessage", (message: MessageInterface) => {
-  if (message.from !== useMessagesStore.getState().from) {
-    if (typeof Audio !== "undefined") {
-      new Audio("/new-message.mp3").play();
+conversationSocket.on(
+  "newMessage",
+  (message: MessageInterface, conversationId: string) => {
+    if (
+      useMessagesStore.getState().conversationId === conversationId &&
+      message.from !== useMessagesStore.getState().from
+    ) {
+      if (typeof Audio !== "undefined") {
+        new Audio("/new-message.mp3").play();
+      }
+      useMessagesStore.getState().addMessage(message);
+      useMessagesStore.getState().unreadMessages += 1;
     }
-    useMessagesStore.getState().addMessage(message);
-    useMessagesStore.getState().unreadMessages += 1;
   }
-});
+);
 
 conversationSocket.on(
   "newConversation",

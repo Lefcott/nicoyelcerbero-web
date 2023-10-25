@@ -10,6 +10,7 @@ export const useMessagesStore = create<MessagesStore>()(
   devtools(
     (set) => ({
       messages: [],
+      unreadMessages: 0,
       conversationId: "",
       from: "user",
       chatToken: "",

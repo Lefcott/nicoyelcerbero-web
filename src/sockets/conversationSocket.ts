@@ -13,6 +13,7 @@ conversationSocket.on("newMessage", (message: MessageInterface) => {
       new Audio("/new-message.mp3").play();
     }
     useMessagesStore.getState().addMessage(message);
+    useMessagesStore.getState().unreadMessages += 1;
   }
 });
 

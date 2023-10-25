@@ -7,5 +7,6 @@ export interface MessagesInterface {
   chatToken: string;
   from: "user" | "admin";
   messages: MessageInterface[];
+  unreadMessages: number;
   conversationId: string;
 }

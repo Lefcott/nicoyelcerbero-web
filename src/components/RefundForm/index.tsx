@@ -63,6 +63,20 @@ export default function RefundForm({ token }) {
                   )} ya ha${conditionalN} sido devuelta${conditionalS}.`,
                   icon: "warning",
                 });
+              } else if (
+                error.response.data.code === "cancellationTimePassed"
+              ) {
+                sweetAlert.fire({
+                  title: "Ya no se puede devolver la entrada",
+                  text: `Ya pasó el tiempo para devolver la${conditionalS} entrada${conditionalS}.`,
+                  icon: "warning",
+                });
+              } else if (error.response.data.code === "showNotFound") {
+                sweetAlert.fire({
+                  title: "No se puede devolver la entrada",
+                  text: "No se encontró el evento solicitado. Por favor, contactate con nosotros.",
+                  icon: "warning",
+                });
               }
             })
             .finally(() => {

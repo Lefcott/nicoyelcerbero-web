@@ -57,7 +57,7 @@ export default function BuyTicketsForm() {
     } catch (error: any) {
       sweetAlert.fire({
         title: "Error",
-        text: "Hubo un error al crear el pago con mercad pago.",
+        text: "Hubo un error al crear el pago con mercado pago.",
         icon: "error",
         confirmButtonColor: "#3085d6",
       });

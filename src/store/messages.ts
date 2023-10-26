@@ -24,7 +24,7 @@ export const useMessagesStore = create<MessagesStore>()(
             set({
               newMessages: useMessagesStore.getState().newMessages.slice(1),
             });
-          }, 4000);
+          }, 8000);
         }
         set((prevState) => ({
           messages: [...prevState.messages, newMessage],

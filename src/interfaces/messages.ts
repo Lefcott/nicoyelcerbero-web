@@ -1,6 +1,7 @@
 export interface MessageInterface {
   from: "user" | "admin";
   text: string;
+  time: string;
 }
 
 export interface MessagesInterface {

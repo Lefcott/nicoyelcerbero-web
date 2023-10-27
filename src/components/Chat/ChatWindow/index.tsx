@@ -15,11 +15,15 @@ export const ChatWindow = ({ onClose }) => {
     if (!parsedMessage) {
       return;
     }
-    addMessage({ from, text: parsedMessage });
+
+    const messageTime = new Date().toISOString(); // Get the current time
+    addMessage({ from, text: parsedMessage, time: messageTime }); // Include the message time
     setCurrentMessage("");
+
     if (textareaRef.current) {
       textareaRef.current.focus(); // Focus on the textarea
     }
+
     await createMessage(parsedMessage);
   };
 
@@ -77,11 +81,19 @@ export const ChatWindow = ({ onClose }) => {
               <div
                 className={`${
                   message.from === "user"
-                    ? "bg-green-500 text-white rounded-tl-lg rounded-tr-lg rounded-bl-lg p-2 ml-auto"
-                    : "bg-gray-300 text-black rounded-tl-lg rounded-tr-lg rounded-br-lg p-2"
-                } flex w-2/3 whitespace-pre-wrap`}
+                    ? "bg-green-500 text-white rounded-tl-lg rounded-tr-lg rounded-bl-lg ml-auto"
+                    : "bg-gray-300 text-black rounded-tl-lg rounded-tr-lg rounded-br-lg"
+                } flex w-2/3 whitespace-pre-wrap p-2 pb-4`}
               >
                 {message.text}
+                {
+                  <div
+                    className={`flex w-7 text-xs text-gray-700 ml-auto mt-auto`}
+                  >
+                    {new Date(message.time).getHours()}:
+                    {`${new Date(message.time).getMinutes()}`.padStart(2, "0")}
+                  </div>
+                }
               </div>
             </div>
           ))}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChatWindow } from "./ChatWindow";
 import { useMessagesStore } from "@/store/messages";
+import useNavigationButtonDetect from "@/hooks/useNavigationButtonDetect";
 
 export const Chat = () => {
   const [chatWindowOpen, setChatWindowOpen] = useState(false);
@@ -9,12 +10,15 @@ export const Chat = () => {
   const handleOpenChatWindow = () => {
     useMessagesStore.setState({ unreadMessages: 0, newMessages: [] });
     setChatWindowOpen(!chatWindowOpen);
+    window.history.pushState({}, "");
   };
 
   const handleCloseChatWindow = () => {
     useMessagesStore.setState({ unreadMessages: 0, newMessages: [] });
     setChatWindowOpen(false);
   };
+
+  useNavigationButtonDetect(handleCloseChatWindow);
 
   return (
     <div className="fixed right-0 bottom-0 z-10">

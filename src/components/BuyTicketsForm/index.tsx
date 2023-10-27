@@ -77,7 +77,7 @@ export default function BuyTicketsForm() {
     setSendingEmail(true);
 
     try {
-      createEvent("SendingVerificationCode");
+      createEvent("SendingVerificationCode", `email: ${email}`);
       await createVerificationCode(email);
     } catch (error: any) {
       sweetAlert.fire({

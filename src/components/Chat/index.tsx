@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChatWindow } from "./ChatWindow";
 import { useMessagesStore } from "@/store/messages";
 import useNavigationButtonDetect from "@/hooks/useNavigationButtonDetect";
+import { createEvent } from "@/services/api/events";
 
 export const Chat = () => {
   const [chatWindowOpen, setChatWindowOpen] = useState(false);
@@ -11,11 +12,13 @@ export const Chat = () => {
     useMessagesStore.setState({ unreadMessages: 0, newMessages: [] });
     setChatWindowOpen(!chatWindowOpen);
     window.history.pushState({}, "");
+    createEvent("ChatOpened");
   };
 
   const handleCloseChatWindow = () => {
     useMessagesStore.setState({ unreadMessages: 0, newMessages: [] });
     setChatWindowOpen(false);
+    createEvent("ChatClosed");
   };
 
   useNavigationButtonDetect(handleCloseChatWindow);

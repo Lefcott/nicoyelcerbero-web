@@ -18,7 +18,8 @@ export default function SuccessPage() {
       <Layout>
         <h1 className="text-xl max-w-[80%] md:max-w-[50%]">
           Ya tenés tu{conditionalS}
-          {conditionalCount} entrada{conditionalS} para el show de Ácidamente!
+          {conditionalCount} entrada{conditionalS} para el show de Amalgama -
+          Ácidamente - Paso Nivel!
         </h1>
         <p className="pt-4 max-w-[80%] md:max-w-[50%] text-sm">
           {guestsCount > 1 ? (

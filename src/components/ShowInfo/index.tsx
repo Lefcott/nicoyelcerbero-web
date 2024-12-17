@@ -70,16 +70,18 @@ export default function ShowInfo() {
             : "Evento apto para todo público"}
         </span>
       </div>
-      <div className="flex items-center space-x-4">
-        <FontAwesomeIcon icon={faVideo} />
-        <Link
-          href="#videos-de-shows-anteriores"
-          className="text-sm pl-[2.5px] text-teal-400"
-          onClick={handleSeeVideosClick}
-        >
-          Ver videos de nuestros shows anteriores
-        </Link>
-      </div>
+      {!!show.previousShows?.length && (
+        <div className="flex items-center space-x-4">
+          <FontAwesomeIcon icon={faVideo} />
+          <Link
+            href="#videos-de-shows-anteriores"
+            className="text-sm pl-[2.5px] text-teal-400"
+            onClick={handleSeeVideosClick}
+          >
+            Ver videos de nuestros shows anteriores
+          </Link>
+        </div>
+      )}
       <div className="mt-3">
         <LocationPhotos />
       </div>

@@ -82,9 +82,11 @@ export default function ShowInfo() {
           </Link>
         </div>
       )}
-      <div className="mt-3">
-        <LocationPhotos />
-      </div>
+      {!!show.locationPhotos.length && (
+        <div className="mt-3">
+          <LocationPhotos />
+        </div>
+      )}
     </>
   );
 }

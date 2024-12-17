@@ -8,7 +8,13 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: { domains: ["res.cloudinary.com", "dl.dropboxusercontent.com"] },
+  images: {
+    domains: [
+      "res.cloudinary.com",
+      "dl.dropboxusercontent.com",
+      "gcdnb.pbrd.co",
+    ],
+  },
 };
 
 module.exports = nextConfig;

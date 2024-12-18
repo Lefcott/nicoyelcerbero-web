@@ -60,7 +60,7 @@ export const ChatWindow = ({ onClose }) => {
 
   return (
     <>
-      <div className="fixed right-0 bottom-0 w-full h-full md:w-[500px] md:h-2/3 md:max-w-[50%] md:mr-32 bg-[#ffffffee] rounded-t-xl">
+      <div className="fixed right-0 bottom-0 w-full h-full md:w-[500px] md:h-2/3 md:max-w-[50%] md:mr-32 bg-[#ffffff] rounded-t-xl">
         <div className="w-full h-12 flex justify-between items-center bg-green-500 rounded-t-xl">
           <div className="text-center flex-grow">
             Chat con <b>Leandro Cotti</b>

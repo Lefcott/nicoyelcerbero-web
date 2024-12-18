@@ -49,7 +49,7 @@ export const Chat = () => {
           )}
           <div className="w-4 h-4 md:w-5 md:h-5 bg-green-500 rounded-full absolute bottom-[2px] right-[2px] border-2" />
           <img
-            src="https://res.cloudinary.com/dua355asm/image/upload/v1698029058/Lean_9-removebg_akngfn.png"
+            src="https://gcdnb.pbrd.co/images/YZxEWSqdU6cQ.png"
             alt="profile-image"
             className="rounded-full bg-black object-cover z-10 w-full h-full"
           />
